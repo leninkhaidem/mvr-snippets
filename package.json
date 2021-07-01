@@ -1,0 +1,25 @@
+{
+    "name": "mvr-snippets",
+    "displayName": "mvr-snippets",
+    "description": "nso mvr-v2 python snippets",
+    "version": "0.0.4",
+    "engines": {
+        "vscode": "^1.57.0"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/leninkhaidem/mvr-snippets"
+    },
+    "publisher": "leninkhaidem",
+    "contributes": {
+        "snippets": [
+            {
+                "language": "python",
+                "path": "./snippets/snippets.code-snippets"
+            }
+        ]
+    }
+}

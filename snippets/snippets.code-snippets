@@ -1,0 +1,101 @@
+{
+	"MVR imports": {
+		"prefix": "mvrimport",
+		"body": [
+			"from typing import Dict, List, Union",
+			"from mvr_v2.common.utils import (Correlator, Dict2, Dx, MvrInit, MvrWf,",
+			"                                 TemplateEngine, XQuery)",
+			"",
+			""
+		],
+		"description": "MVR main workflow class"
+	},
+	"MVR main workflow class": {
+		"prefix": "mvrwf",
+		"body": [
+			"from typing import Dict, List, Union",
+			"from mvr_v2.common.utils import (Correlator, Dict2, Dx, MvrInit, MvrWf,",
+			"                                 TemplateEngine, XQuery)",
+			"",
+			"class Main(MvrWf):",
+			"    \"\"\"",
+			"    Main Execution Flow. This is where the logic resides.",
+			"    \"\"\"",
+			"",
+			"    def execute(self, _input_obj):",
+			"        \"\"\"",
+			"        This method call triggers the execution",
+			"        \"\"\"",
+			"        _m = MvrInit()",
+			"        input_obj = _m >> _input_obj",
+			"        return _m",
+			""
+		],
+		"description": "MVR main workflow class"
+	},
+	"Creates a Dx class": {
+		"prefix": "mvrdx",
+		"body": [
+			"class ${1:Classname}(Dx):",
+			"    def __init__(self, ${2:*args}) -> None:",
+			"        pass",
+			"",
+			"    def data_source(self, ${2:*args}) -> XQuery:",
+			"        self.q.xpath = f\"/devices/device[name={arg1!r}]/config/ip/vrf[name={arg2!r}]\"",
+			"        self.q.params = {",
+			"            \"param-name\": \"relative-path-to-desired-node\",",
+			"        }",
+			"        return self.q",
+			"",
+			"    def compute_vars(self, _p: Dict2) -> Union[Dict, Dict2]:",
+			"        return _p",
+			"",
+			"    def devices_to_be_synced(self, _p: Dict2) -> List:",
+			"        return []",
+			""
+		],
+		"description": "Creates a Dx class instance"
+	},
+	"MVR Correlator class": {
+		"prefix": "mvrcorrelator",
+		"body": [
+			"class ${1:Classname}(Correlator):",
+			"    def execute(self, data):",
+			"        payload = []",
+			"        for _i in data.${2:primary_data_set}:",
+			"            _instance = self.payload_instance()",
+			"            # list comprehension filtering ",
+			"            data_set_1 = []",
+			"            data_set_2 = []",
+			"            data_set_3 = []",
+			"            # the add method accepts a Dict, Dict2 or a List object",
+			"            _instance.add(_i)",
+			"            _instance.add(data_set_1)",
+			"            _instance.add(data_set_2)",
+			"            _instance.add(data_set_3)",
+			"            # or",
+			"            # _instance.add_multiple([_i,data_set_1,data_set_2,data_set_3])",
+			"            payload.append(_instance)",
+			"        return payload",
+			""
+		],
+		"description": "MVR Correlator Class"
+	},
+	"MVR TemplateEngine Class": {
+		"prefix": "mvrtemplate",
+		"body": [
+			"class ${1:Classname}(TemplateEngine):",
+			"    def settings(self):",
+			"        self.templates = [\"${2:example}\"]",
+			"",
+			"    def format_single_commit_comment(self, _input) -> str:",
+			"        # return _input.device_name",
+			"        return 'test'",
+			"",
+			"    def format_splitted_commit_comment(self, _single_payload_instance) -> str:",
+			"        #return _single_payload_instance.interface_id",
+			"        return 'test'"
+		],
+		"description": "MVR TemplateEngine Class"
+	}
+}
